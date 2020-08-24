@@ -62,8 +62,16 @@ class Calculator{
 
     delete(){
         if(this.input_num_stream.length > this.input_operator_stream.length){
+            const last_num = this.input_num_stream[this.input_num_stream.length - 1];
+            const new_num = last_num.slice(0, last_num.length-1);
             this.input_num_stream.pop();
-            this.current_num = '';
+            if(new_num !== ''){
+                this.input_num_stream.push(new_num);
+                this.current_num = new_num;
+            }else{
+                this.current_num = '';
+            }
+            
         }else{
             this.input_operator_stream.pop();
         }
