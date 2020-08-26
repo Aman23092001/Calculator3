@@ -1,7 +1,5 @@
-const screen = document.querySelector('.calculator-bg__main__screen');
 const screen_first = document.querySelector('.calculator-bg__main__screen__first')
 const screen_second = document.querySelector('.calculator-bg__main__screen__second')
-const btns = document.querySelectorAll('button');
 const acBtn = document.querySelector('.calculator-bg__main__ac');
 const delBtn = document.querySelector('.calculator-bg__main__del');
 const resultBtn = document.querySelector('.calculator-bg__main__result');
@@ -17,18 +15,15 @@ class Calculator{
         this.input_num_stream = [];
         this.input_operator_stream = [];
         this.current_num = '';
-        this.current_operator = '';
-        
-        this.clear();
     }
 
-    clear(){
+    ommit(){
         this.current_num = '';
         this.input_num_stream.splice(0, this.input_num_stream.length);
         this.input_operator_stream.splice(0, this.input_operator_stream.length);
     }
 
-    appendNumber(number){
+    appendDigit(number){
         if(this.current_num === ''){
             if(number.innerText === '.'){
                 this.current_num += '0';
@@ -57,7 +52,6 @@ class Calculator{
         this.operator = operator.innerText;
         this.input_operator_stream.push(this.operator);
         this.current_num = '';
-        //console.log(this.input_num_stream, this.input_operator_stream);
     }
 
     delete(){
@@ -77,19 +71,17 @@ class Calculator{
         }
     }
 
-    compute(){
+    calculate(){
         let compute;
         
         
             let first_num, second_num, operator;
             let first_count = 1, second_count = 0;
             compute = parseFloat(this.input_num_stream[0]);
-            //console.log("the length of num arr ", this.input_num_stream.length)
             while(first_count < this.input_num_stream.length){
                 second_num = parseFloat(this.input_num_stream[first_count]);
                 operator = this.input_operator_stream[second_count];
                 if(isNaN(second_num)){
-                    //console.log("It's NaN")
                     compute = compute;
                 }else{
                     switch(operator){
@@ -113,7 +105,7 @@ class Calculator{
         
         return compute;
     }
-    updateDisplay(){
+    updateScreen(){
         screen_first.classList.remove('small');
         screen_second.classList.remove('big');
 
@@ -132,34 +124,34 @@ class Calculator{
         if(this.input_num_stream.length === 0){
             this.textElement_second.innerText = "0";
         }else{
-            this.textElement_second.innerText = `= ${this.compute()}`
+            this.textElement_second.innerText = `= ${this.calculate()}`
         }
     }
 }
 
 const calc = new Calculator(screen_first, screen_second);
 acBtn.addEventListener('click', ()=>{
-    calc.clear();
-    calc.updateDisplay()
+    calc.ommit();
+    calc.updateScreen()
 })
 
 numBtns.forEach(btn => {
     btn.addEventListener('click', ()=> {
-        calc.appendNumber(btn);
-        calc.updateDisplay();
+        calc.appendDigit(btn);
+        calc.updateScreen();
     })
 })
 
 operatorBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         calc.chooseOperation(btn);
-        calc.updateDisplay();
+        calc.updateScreen();
     })
 })
 
 delBtn.addEventListener('click', ()=>{
     calc.delete();
-    calc.updateDisplay();
+    calc.updateScreen();
 })
 resultBtn.addEventListener('click', ()=>{
     screen_first.classList.remove('big');

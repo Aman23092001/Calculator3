@@ -5,23 +5,16 @@ body{
     width: 100%;
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
-    background-image: linear-gradient(to right, $dark-blue, $light-blue);
+    background-image: linear-gradient(to right, $bg_first, $bg_second);
 }
 
 .calculator-bg{
     display: flex;
     height: 100%;
     width: 100%;
-    //height: 100%;
-    //height: 80%;
-    //border-radius: 25px;
-    //margin: auto;
-    //background: $calc-bg;
     justify-content: center;
     &__main{
-        //background: red;
-        background-image: linear-gradient(to right, $calc-bg, $btn-text);
-        //margin: 3% 0;
+        background-image: linear-gradient(to right, $calc-bg_first, $calc-bg_second);
         width: 285px;
         height: max-content;
         border-radius: 25px;
@@ -39,10 +32,10 @@ body{
             border: none;
             font-weight: map-get($font-weight, "medium");
             font-size: 1.4rem;
-            background-image: linear-gradient(to right, $btn-bg, $btn-bg__hover);
+            background-image: linear-gradient(to right, $btn-bg_first, $btn-bg_second);
             color: $btn-text;
             &:hover{
-                background-image: linear-gradient(to right, $btn-bg, $btn-bg);
+                background-image: linear-gradient(to right, $btn-bg_first, $btn-bg_first);
             }
         }
         
@@ -52,7 +45,7 @@ body{
             display: flex;
             align-items: flex-end;
             justify-content: flex-end;
-            background-image: linear-gradient(to right, $dark-blue, $light-blue);
+            background-image: linear-gradient(to right, $bg_first, $bg_second);
             padding: 7px;
             grid-column: 1 / -1;
             word-break: break-all;
